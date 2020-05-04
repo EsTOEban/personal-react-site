@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import ReactGA from 'react-ga';
-import $ from 'jquery';
 import './App.css';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
@@ -24,35 +23,20 @@ class App extends Component {
     }
 
     getResumeData() {
-        $.ajax({
-            url: '/resumeData.json',
-            dataType: 'json',
-            cache: false,
-            success: function (data) {
-                this.setState({resumeData: data});
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.log(err);
-                alert(err);
-            }
+        fetch(process.env.PUBLIC_URL + '/resumeData.json').then(results => {
+            return results.json();
+        }).then(data => {
+            this.setState({resumeData: data});
         });
     }
 
-    getBackgroundPicture() {
-        let rand = Math.floor(Math.random() * 10);
-
-        // fetch('https://www.reddit.com/r/WidescreenWallpaper/.json')
-        fetch('https://www.reddit.com/r/spaceporn/top/.json')
-            .then(results => {
-                return results.json();
-            }).then(data => {
-            this.setState({backgroundPicture: data.data.children[rand].data.url});
-        });
+    setBackgroundPicture() {
+        this.setState({backgroundPicture: process.env.PUBLIC_URL + '/images/background.jpg'});
     }
 
     componentDidMount() {
         this.getResumeData();
-        this.getBackgroundPicture();
+        this.setBackgroundPicture();
     }
 
     render() {
