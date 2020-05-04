@@ -21,5 +21,5 @@ jobs:
       run: |
         git config --global user.email "kevin.haynes.dev@gmail.com"
         git config --global user.name "EsTOEban"
-        git remote set-url origin https://5143533ef46ca3a7ced93b2f4de2eace9e51eb27@github.com/EsTOEban/personal-react-site.git
+        git remote set-url origin https://95ac29f35afbe4411702cadef3fc9a59f63ebfbf@github.com/EsTOEban/personal-react-site.git
         npm run deploy
